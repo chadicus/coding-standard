@@ -1,0 +1,28 @@
+# Chadicus Coding Standard
+
+A [PHP_CodeSniffer](http://www.squizlabs.com/php-codesniffer) coding standard.
+
+## Composer
+
+This standard is meant to be used in a project using [Composer](http://getcomposer.org).  It can be added to your project's composer.json as follows:
+
+```json
+{
+    "require-dev": {
+        "chadicus/coding-standard": "~1.0"
+    }
+}
+```
+
+Then to use it, you can run the following (or add to your build process):
+
+```bash
+./vendor/bin/phpcs --standard=$(pwd)/vendor/chadicus/coding-standard/Chadicus YOUR_FILES_AND_DIRECTORIES
+```
+
+## Contact
+
+Developers may be contacted at:
+
+ * [Pull Requests](https://github.com/chadicus/coding-standard/pulls)
+ * [Issues](https://github.com/chadicus/coding-standard/issues)

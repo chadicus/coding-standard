@@ -1,0 +1,16 @@
+{
+    "name": "chadicus/coding-standard",
+    "description": "Chadicus Coding standard",
+    "keywords": ["phpcs", "coding", "standard"],
+    "authors": [
+        {
+            "name": "Chad Gray",
+            "email": "chadwickgray@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "squizlabs/php_codesniffer": "~1.4"
+    }
+}
