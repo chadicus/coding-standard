@@ -2,6 +2,8 @@
 
 A [PHP_CodeSniffer](http://www.squizlabs.com/php-codesniffer) coding standard.
 
+See what "sniffs" are enforced [here](http://chadicus.github.io/coding-standard).
+
 ## Composer
 
 This standard is meant to be used in a project using [Composer](http://getcomposer.org).  It can be added to your project's composer.json as follows:
