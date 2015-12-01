@@ -8,7 +8,6 @@
     <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement" />                                                                                 
     <rule ref="Generic.CodeAnalysis.UselessOverridingMethod" />                                                                                  
     <rule ref="Generic.ControlStructures.InlineControlStructure" />                                                                              
-    <rule ref="Squiz.Commenting.ClassComment" />
     <rule ref="Squiz.Commenting.DocCommentAlignment" />                                                                                          
     <rule ref="Squiz.Commenting.FunctionComment" />                                                                                      
     <rule ref="Squiz.Commenting.FunctionCommentThrowTag" />                                                                                      
