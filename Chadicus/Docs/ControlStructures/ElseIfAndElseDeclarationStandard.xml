@@ -1,0 +1,34 @@
+<documentation title="ElseIf and Else Declarations">
+    <standard>
+    <![CDATA[
+    An if expression with an else branch is never necessary.  You can rewrite the conditions in a way that the else is not necessary and the code becomes simpler to read.
+    ]]>
+    </standard>
+    <code_comparison>
+        <code title="Valid: Method returns early to avoid use of else.">
+        <![CDATA[
+public function bar($flag)
+{
+    if ($flag) {
+        // perform action in true case
+        return;
+    } 
+
+    // perform action in false case
+}
+        ]]>
+        </code>
+        <code title="Invalid: Else statement used.">
+        <![CDATA[
+public function bar($flag)
+{
+    if ($flag) {
+        // perform action in true case
+    <em>} else {</em>
+        // perform action in false case
+    }
+}
+        ]]>
+        </code>
+    </code_comparison>
+</documentation>
