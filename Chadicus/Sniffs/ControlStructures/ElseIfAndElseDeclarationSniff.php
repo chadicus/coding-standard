@@ -2,28 +2,28 @@
 /**
  * Generates a warning if else or elseif control structures are used.
  */
-final class Chadicus_Sniffs_ControlStructures_ElseIfAndElseDeclarationSniff implements PHP_CodeSniffer_Sniff
+final class Chadicus_Sniffs_ControlStructures_ElseIfAndElseDeclarationSniff
+    extends PHP_CodeSniffer_Standards_AbstractScopeSniff
 {
-
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return array
+     * Constructs the test with the tokens it wishes to listen for.
      */
-    public function register()
+    public function __construct()
     {
-        return [T_ELSEIF, T_ELSE];
+        parent::__construct([T_CLASS], [T_ELSEIF, T_ELSE]);
     }
 
     /**
      * Processes this test, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param integer              $stackPtr  The position of the current token in the stack passed in $tokens.
+     * @param PHP_CodeSniffer_File $phpcsFile The current file being scanned.
+     * @param int                  $stackPtr  The position of the current token in the
+     *                                        stack passed in $tokens.
+     * @param int                  $currScope A pointer to the start of the scope.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function processTokenWithinScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $currScope)
     {
         $error = 'Use of ELSE and ELSEIF is discouraged. An if expression with an else branch is never necessary. You '
                . 'can rewrite the conditions in a way that the else is not necessary and the code becomes simpler to '
