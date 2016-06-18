@@ -2,23 +2,24 @@
 <ruleset name="Chadicus">
     <description>The Chadicus coding standard.</description>
     <rule ref="PSR2"/>
-    <rule ref="Generic.CodeAnalysis.EmptyStatement" />                                                                                           
-    <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />                                                                                 
-    <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall" />                                                                              
-    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement" />                                                                                 
-    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod" />                                                                                  
-    <rule ref="Generic.ControlStructures.InlineControlStructure" />                                                                              
-    <rule ref="Squiz.Commenting.DocCommentAlignment" />                                                                                          
-    <rule ref="Squiz.Commenting.FunctionComment" />                                                                                      
-    <rule ref="Squiz.Commenting.FunctionCommentThrowTag" />                                                                                      
-    <rule ref="Squiz.Commenting.VariableComment" />                                                                                                 
-    <rule ref="Generic.Commenting.Fixme" />                                                                                                      
-    <rule ref="Generic.Commenting.Todo" /> 
+    <rule ref="Generic.CodeAnalysis.EmptyStatement" />
+    <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />
+    <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall" />
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement" />
+    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod" />
+    <rule ref="Generic.ControlStructures.InlineControlStructure" />
+    <rule ref="Squiz.Commenting.DocCommentAlignment" />
+    <rule ref="Squiz.Commenting.FunctionComment" />
+    <rule ref="Squiz.Commenting.FunctionCommentThrowTag" />
+    <rule ref="Squiz.Commenting.VariableComment" />
+    <rule ref="Generic.Commenting.Fixme" />
+    <rule ref="Generic.Commenting.Todo" />
     <rule ref="Generic.Metrics.CyclomaticComplexity" />
-    <rule ref="Generic.Metrics.NestingLevel">                                                                                                    
-        <properties>                                                                                                                             
+    <rule ref="Generic.Metrics.NestingLevel">
+        <properties>
             <property name="nestingLevel" value="2" />
             <property name="absolutenestingLevel" value="3" />
-        </properties>                                                                                                                            
-    </rule> 
+        </properties>
+    </rule>
+    <rule ref="Squiz.PHP.DiscouragedFunctions" />
 </ruleset>
