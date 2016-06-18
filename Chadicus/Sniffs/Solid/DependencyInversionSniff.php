@@ -32,10 +32,12 @@ final class Chadicus_Sniffs_Solid_DependencyInversionSniff implements PHP_CodeSn
 
         $tokens = $phpcsFile->getTokens();
         $scopeStart   = $tokens[$stackPtr]['scope_opener'];
-        $newUsage = $phpcsFile->findNext(T_NEW, ($scopeStart + 1), $tokens[$stackPtr]['scope_closer'], true);
-        if ($newUsage !== false) {
-            $error = 'Use of NEW within a constructor can be a sign of tight coupling. Consider injecting this dependency.';
-            $phpcsFile->addWarning($error, $newUsage, 'Discouraged');
+        $newUsage = $phpcsFile->findNext([T_NEW], ($scopeStart + 1), $tokens[$stackPtr]['scope_closer'], true);
+        if ($newUsage === false) {
+            return;
         }
+
+        $error = 'Use of NEW within a constructor can be a sign of tight coupling. Consider injecting this dependency.';
+        $phpcsFile->addWarning($error, $newUsage, 'Discouraged');
     }
 }
