@@ -6,6 +6,7 @@
     <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />
     <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall" />
     <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement" />
+    <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier" />
     <rule ref="Generic.CodeAnalysis.UselessOverridingMethod" />
     <rule ref="Generic.ControlStructures.InlineControlStructure" />
     <rule ref="Squiz.Commenting.DocCommentAlignment" />
@@ -25,5 +26,13 @@
     <!-- make missing scalar type hints a warning -->
     <rule ref="Squiz.Commenting.FunctionComment.ScalarTypeHintMissing">
         <type>warning</type>
+    </rule>
+
+    <!-- Enforce strict indentation -->
+    <rule ref="Generic.WhiteSpace.ScopeIndent">
+        <properties>
+            <property name="ignoreIndentationTokens" type="array" value="T_COMMENT,T_DOC_COMMENT_OPEN_TAG"/>
+            <property name="exact" value="true"/>
+        </properties>
     </rule>
 </ruleset>
