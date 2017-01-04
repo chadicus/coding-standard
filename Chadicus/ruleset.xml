@@ -27,12 +27,4 @@
     <rule ref="Squiz.Commenting.FunctionComment.ScalarTypeHintMissing">
         <type>warning</type>
     </rule>
-
-    <!-- Enforce strict indentation -->
-    <rule ref="Generic.WhiteSpace.ScopeIndent">
-        <properties>
-            <property name="ignoreIndentationTokens" type="array" value="T_COMMENT,T_DOC_COMMENT_OPEN_TAG"/>
-            <property name="exact" value="true"/>
-        </properties>
-    </rule>
 </ruleset>
