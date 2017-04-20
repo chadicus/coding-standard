@@ -22,8 +22,4 @@
         </properties>
     </rule>
     <rule ref="Squiz.PHP.DiscouragedFunctions" />
-    <!-- make missing scalar type hints a warning -->
-    <rule ref="Squiz.Commenting.FunctionComment.ScalarTypeHintMissing">
-        <type>warning</type>
-    </rule>
 </ruleset>
