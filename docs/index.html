@@ -1,0 +1,771 @@
+<html>
+ <head>
+  <title>Chadicus Coding Standards</title>
+  <style>
+                    body {
+                        background-color: #FFFFFF;
+                        font-size: 14px;
+                        font-family: Arial, Helvetica, sans-serif;
+                        color: #000000;
+                    }
+
+                    h1 {
+                        color: #666666;
+                        font-size: 20px;
+                        font-weight: bold;
+                        margin-top: 0px;
+                        background-color: #E6E7E8;
+                        padding: 20px;
+                        border: 1px solid #BBBBBB;
+                    }
+
+                    h2 {
+                        color: #00A5E3;
+                        font-size: 16px;
+                        font-weight: normal;
+                        margin-top: 50px;
+                    }
+
+                    .code-comparison {
+                        width: 100%;
+                    }
+
+                    .code-comparison td {
+                        border: 1px solid #CCCCCC;
+                    }
+
+                    .code-comparison-title, .code-comparison-code {
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-size: 12px;
+                        color: #000000;
+                        vertical-align: top;
+                        padding: 4px;
+                        width: 50%;
+                        background-color: #F1F1F1;
+                        line-height: 15px;
+                    }
+
+                    .code-comparison-code {
+                        font-family: Courier;
+                        background-color: #F9F9F9;
+                    }
+
+                    .code-comparison-highlight {
+                        background-color: #DDF1F7;
+                        border: 1px solid #00A5E3;
+                        line-height: 15px;
+                    }
+
+                    .tag-line {
+                        text-align: center;
+                        width: 100%;
+                        margin-top: 30px;
+                        font-size: 12px;
+                    }
+
+                    .tag-line a {
+                        color: #000000;
+                    }
+                </style>
+ </head>
+ <body>
+  <h1>./Chadicus Coding Standards</h1>
+  <h2>Table of Contents</h2>
+  <ul class="toc">
+   <li><a href="#Superfluous-Whitespace">Superfluous Whitespace</a></li>
+   <li><a href="#ElseIf-and-Else-Declarations">ElseIf and Else Declarations</a></li>
+   <li><a href="#Namespace-Declarations">Namespace Declarations</a></li>
+   <li><a href="#Namespace-Declarations">Namespace Declarations</a></li>
+   <li><a href="#Method-Declarations">Method Declarations</a></li>
+   <li><a href="#Class-Declarations">Class Declarations</a></li>
+   <li><a href="#Property-Declarations">Property Declarations</a></li>
+   <li><a href="#Elseif-Declarations">Elseif Declarations</a></li>
+   <li><a href="#Switch-Declarations">Switch Declarations</a></li>
+   <li><a href="#Control-Structure-Spacing">Control Structure Spacing</a></li>
+   <li><a href="#End-File-Newline">End File Newline</a></li>
+   <li><a href="#Class-Declaration">Class Declaration</a></li>
+   <li><a href="#Side-Effects">Side Effects</a></li>
+   <li><a href="#PHP-Code-Tags">PHP Code Tags</a></li>
+   <li><a href="#Byte-Order-Marks">Byte Order Marks</a></li>
+   <li><a href="#Constant-Names">Constant Names</a></li>
+   <li><a href="#Line-Endings">Line Endings</a></li>
+   <li><a href="#Line-Length">Line Length</a></li>
+   <li><a href="#Multiple-Statements-On-a-Single-Line">Multiple Statements On a Single Line</a></li>
+   <li><a href="#Scope-Indentation">Scope Indentation</a></li>
+   <li><a href="#No-Tab-Indentation">No Tab Indentation</a></li>
+   <li><a href="#Lowercase-Keywords">Lowercase Keywords</a></li>
+   <li><a href="#PHP-Constants">PHP Constants</a></li>
+   <li><a href="#Scope-Keyword-Spacing">Scope Keyword Spacing</a></li>
+   <li><a href="#Lowercase-Function-Keywords">Lowercase Function Keywords</a></li>
+   <li><a href="#Default-Values-in-Function-Declarations">Default Values in Function Declarations</a></li>
+   <li><a href="#Function-Argument-Spacing">Function Argument Spacing</a></li>
+   <li><a href="#Foreach-Loop-Declarations">Foreach Loop Declarations</a></li>
+   <li><a href="#For-Loop-Declarations">For Loop Declarations</a></li>
+   <li><a href="#Lowercase-Control-Structure-Keywords">Lowercase Control Structure Keywords</a></li>
+   <li><a href="#Inline-Control-Structures">Inline Control Structures</a></li>
+   <li><a href="#Empty-Statements">Empty Statements</a></li>
+   <li><a href="#Condition-Only-For-Loops">Condition-Only For Loops</a></li>
+   <li><a href="#For-Loops-With-Function-Calls-in-the-Test">For Loops With Function Calls in the Test</a></li>
+   <li><a href="#Unconditional-If-Statements">Unconditional If Statements</a></li>
+   <li><a href="#Unnecessary-Final-Modifiers">Unnecessary Final Modifiers</a></li>
+   <li><a href="#Useless-Overriding-Methods">Useless Overriding Methods</a></li>
+   <li><a href="#Doc-Comment-Alignment">Doc Comment Alignment</a></li>
+   <li><a href="#Doc-Comment-Throws-Tag">Doc Comment Throws Tag</a></li>
+   <li><a href="#Todo-Comments">Todo Comments</a></li>
+   <li><a href="#Todo-Comments">Todo Comments</a></li>
+   <li><a href="#Cyclomatic-Complexity">Cyclomatic Complexity</a></li>
+   <li><a href="#Nesting-Level">Nesting Level</a></li>
+  </ul>
+  <a name="Superfluous-Whitespace" />
+  <h2>Superfluous Whitespace</h2>
+  <p class="text">There should be no whitespace at the beginning or end of files or at the end of lines.  There should also never be 2 blank lines in a row.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: No superfluous whitespace.</td>
+    <td class="code-comparison-title">Invalid: Two consecutive new lines.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">&lt;?php</br>$foo&nbsp;=&nbsp;1;</br>$bar&nbsp;=&nbsp;2;</td>
+    <td class="code-comparison-code">$foo&nbsp;=&nbsp;1;</br><span class="code-comparison-highlight"></span></br><span class="code-comparison-highlight"></span></br>$bar&nbsp;=&nbsp;2;</td>
+   </tr>
+  </table>
+  <p class="text">There should be no empty line after the opening brace or before the closing brace of a function, class, or control structure.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: No superfluous whitespace.</td>
+    <td class="code-comparison-title">Invalid: An extra line at beginning or end of function or class.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">function&nbsp;foo()</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;"Hello\n";</br>}</td>
+    <td class="code-comparison-code">function&nbsp;foo()</br>{</br><span class="code-comparison-highlight"></span></br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;"Hello\n";</br>}</br></br>class&nbsp;Foo()</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;bar()</br>&nbsp;&nbsp;&nbsp;&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;3;</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br><span class="code-comparison-highlight"></span></br>}</td>
+   </tr>
+  </table>
+  <a name="ElseIf-and-Else-Declarations" />
+  <h2>ElseIf and Else Declarations</h2>
+  <p class="text">An if expression with an else branch is never necessary.  You can rewrite the conditions in a way that the else is not necessary and the code becomes simpler to read.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Method returns early to avoid use of else.</td>
+    <td class="code-comparison-title">Invalid: Else statement used.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">public&nbsp;function&nbsp;bar($flag)</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;($flag)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;perform&nbsp;action&nbsp;in&nbsp;true&nbsp;case</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;</br>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;</br></br>&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;perform&nbsp;action&nbsp;in&nbsp;false&nbsp;case</br>}</td>
+    <td class="code-comparison-code">public&nbsp;function&nbsp;bar($flag)</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;($flag)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;perform&nbsp;action&nbsp;in&nbsp;true&nbsp;case</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comparison-highlight">}&nbsp;else&nbsp;{</span></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;perform&nbsp;action&nbsp;in&nbsp;false&nbsp;case</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}</td>
+   </tr>
+  </table>
+  <a name="Namespace-Declarations" />
+  <h2>Namespace Declarations</h2>
+  <p class="text">There must be one blank line after the namespace declaration.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: One blank line after the namespace declaration.</td>
+    <td class="code-comparison-title">Invalid: No blank line after the namespace declaration.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">namespace&nbsp;\Foo\Bar;</br><span class="code-comparison-highlight"></span></br>use&nbsp;\Baz;</td>
+    <td class="code-comparison-code">namespace&nbsp;\Foo\Bar;</br>use&nbsp;\Baz;</td>
+   </tr>
+  </table>
+  <a name="Namespace-Declarations" />
+  <h2>Namespace Declarations</h2>
+  <p class="text">Each use declaration must contain only one namespace and must come after the first namespace declaration.  There should be one blank line after the final use statement.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: One use declaration per namespace.</td>
+    <td class="code-comparison-title">Invalid: Multiple namespaces in a use declaration.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">use&nbsp;\Foo;</br>use&nbsp;\Bar;</td>
+    <td class="code-comparison-code">use&nbsp;<span class="code-comparison-highlight">\Foo,&nbsp;\Bar</span>;</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Use statements come after first namespace.</td>
+    <td class="code-comparison-title">Invalid: Namespace declared after use.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">namespace&nbsp;\Foo;</br></br>use&nbsp;\Bar;</td>
+    <td class="code-comparison-code">use&nbsp;\Bar;</br></br>namespace&nbsp;\Foo;</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: A single blank line after the final use statement.</td>
+    <td class="code-comparison-title">Invalid: No blank line after the final use statement.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">use&nbsp;\Foo;</br>use&nbsp;\Bar;</br><span class="code-comparison-highlight"></span></br>class&nbsp;Baz</br>{</br>}</td>
+    <td class="code-comparison-code">use&nbsp;\Foo;</br>use&nbsp;\Bar;</br>class&nbsp;Baz</br>{</br>}</td>
+   </tr>
+  </table>
+  <a name="Method-Declarations" />
+  <h2>Method Declarations</h2>
+  <p class="text">Method names should not be prefixed with an underscore to indicate visibility.  The static keyword, when present, should come after the visibility declaration, and the final and abstract keywords should come before.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Correct method naming.</td>
+    <td class="code-comparison-title">Invalid: An underscore prefix used to indicate visibility.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;function&nbsp;<span class="code-comparison-highlight">bar</span>()</br>&nbsp;&nbsp;&nbsp;&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}</td>
+    <td class="code-comparison-code">class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;function&nbsp;<span class="code-comparison-highlight">_bar</span>()</br>&nbsp;&nbsp;&nbsp;&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Correct ordering of method prefixes.</td>
+    <td class="code-comparison-title">Invalid: static keyword used before visibility and final used after.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comparison-highlight">final&nbsp;public&nbsp;static</span>&nbsp;function&nbsp;<span class="code-comparison-highlight">bar</span>()</br>&nbsp;&nbsp;&nbsp;&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}</td>
+    <td class="code-comparison-code">class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comparison-highlight">static&nbsp;public&nbsp;final</span>&nbsp;function&nbsp;<span class="code-comparison-highlight">bar</span>()</br>&nbsp;&nbsp;&nbsp;&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}</td>
+   </tr>
+  </table>
+  <a name="Class-Declarations" />
+  <h2>Class Declarations</h2>
+  <p class="text">There should be exactly 1 space between the abstract or final keyword and the class keyword and between the class keyword and the class name.  The extends and implements keywords, if present, must be on the same line as the class name.  When interfaces implemented are spread over multiple lines, there should be exactly 1 interface mentioned per line indented by 1 level.  The closing brace of the class must go on the first line after the body of the class and must be on a line by itself.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Correct spacing around class keyword.</td>
+    <td class="code-comparison-title">Invalid: 2 spaces used around class keyword.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">abstract<span class="code-comparison-highlight">&nbsp;</span>class<span class="code-comparison-highlight">&nbsp;</span>Foo</br>{</br>}</td>
+    <td class="code-comparison-code">abstract<span class="code-comparison-highlight">&nbsp;&nbsp;</span>class<span class="code-comparison-highlight">&nbsp;&nbsp;</span>Foo</br>{</br>}</td>
+   </tr>
+  </table>
+  <a name="Property-Declarations" />
+  <h2>Property Declarations</h2>
+  <p class="text">Property names should not be prefixed with an underscore to indicate visibility.  Visibility should be used to declare properties rather than the var keyword.  Only one property should be declared within a statement.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Correct property naming.</td>
+    <td class="code-comparison-title">Invalid: An underscore prefix used to indicate visibility.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;$<span class="code-comparison-highlight">bar</span>;</br>}</td>
+    <td class="code-comparison-code">class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;$<span class="code-comparison-highlight">_bar</span>;</br>}</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Visibility of property declared.</td>
+    <td class="code-comparison-title">Invalid: Var keyword used to declare property.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comparison-highlight">private</span>&nbsp;$bar;</br>}</td>
+    <td class="code-comparison-code">class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comparison-highlight">var</span>&nbsp;$bar;</br>}</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: One property declared per statement.</td>
+    <td class="code-comparison-title">Invalid: Multiple properties declared in one statement.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;$bar;</br>&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;$baz;</br>}</td>
+    <td class="code-comparison-code">class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;<span class="code-comparison-highlight">$bar,&nbsp;$baz</span>;</br>}</td>
+   </tr>
+  </table>
+  <a name="Elseif-Declarations" />
+  <h2>Elseif Declarations</h2>
+  <p class="text">PHP's elseif keyword should be used instead of else if.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Single word elseif keyword used.</td>
+    <td class="code-comparison-title">Invalid: Separate else and if keywords used.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">if&nbsp;($foo)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br>}&nbsp;<span class="code-comparison-highlight">elseif</span>&nbsp;($bar)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;2;</br>}</td>
+    <td class="code-comparison-code">if&nbsp;($foo)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br>}&nbsp;<span class="code-comparison-highlight">else&nbsp;if</span>&nbsp;($bar)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;2;</br>}</td>
+   </tr>
+  </table>
+  <a name="Switch-Declarations" />
+  <h2>Switch Declarations</h2>
+  <p class="text">Case statements should be indented 4 spaces from the switch keyword.  It should also be followed by a space.  Colons in switch declarations should not be preceded by whitespace.  Break statements should be indented 4 more spaces from the case statement.  There must be a comment when falling through from one case into the next.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Case statement indented correctly.</td>
+    <td class="code-comparison-title">Invalid: Case statement not indented 4 spaces.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">switch&nbsp;($foo)&nbsp;{</br><span class="code-comparison-highlight">&nbsp;&nbsp;&nbsp;&nbsp;</span>case&nbsp;'bar':</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</br>}</td>
+    <td class="code-comparison-code">switch&nbsp;($foo)&nbsp;{</br><span class="code-comparison-highlight"></span>case&nbsp;'bar':</br>&nbsp;&nbsp;&nbsp;&nbsp;break;</br>}</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Case statement followed by 1 space.</td>
+    <td class="code-comparison-title">Invalid: Case statement not followed by 1 space.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">switch&nbsp;($foo)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;case<span class="code-comparison-highlight">&nbsp;</span>'bar':</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</br>}</td>
+    <td class="code-comparison-code">switch&nbsp;($foo)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;case<span class="code-comparison-highlight"></span>'bar':</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</br>}</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Colons not prefixed by whitespace.</td>
+    <td class="code-comparison-title">Invalid: Colons prefixed by whitespace.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">switch&nbsp;($foo)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;'bar'<span class="code-comparison-highlight"></span>:</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</br>&nbsp;&nbsp;&nbsp;&nbsp;default<span class="code-comparison-highlight"></span>:</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</br>}</td>
+    <td class="code-comparison-code">switch&nbsp;($foo)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;'bar'<span class="code-comparison-highlight">&nbsp;</span>:</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</br>&nbsp;&nbsp;&nbsp;&nbsp;default<span class="code-comparison-highlight">&nbsp;</span>:</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</br>}</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Break statement indented correctly.</td>
+    <td class="code-comparison-title">Invalid: Break statement not indented 4 spaces.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">switch&nbsp;($foo)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;'bar':</br><span class="code-comparison-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>break;</br>}</td>
+    <td class="code-comparison-code">switch&nbsp;($foo)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;'bar':</br><span class="code-comparison-highlight">&nbsp;&nbsp;&nbsp;&nbsp;</span>break;</br>}</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Comment marking intentional fall-through.</td>
+    <td class="code-comparison-title">Invalid: No comment marking intentional fall-through.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">switch&nbsp;($foo)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;'bar':</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comparison-highlight">//&nbsp;no&nbsp;break</span></br>&nbsp;&nbsp;&nbsp;&nbsp;default<span class="code-comparison-highlight"></span>:</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</br>}</td>
+    <td class="code-comparison-code">switch&nbsp;($foo)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;'bar':</br>&nbsp;&nbsp;&nbsp;&nbsp;default<span class="code-comparison-highlight"></span>:</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</br>}</td>
+   </tr>
+  </table>
+  <a name="Control-Structure-Spacing" />
+  <h2>Control Structure Spacing</h2>
+  <p class="text">Control Structures should have 0 spaces after opening parentheses and 0 spaces before closing parentheses.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Correct spacing.</td>
+    <td class="code-comparison-title">Invalid: Whitespace used inside the parentheses.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">if&nbsp;(<span class="code-comparison-highlight"></span>$foo<span class="code-comparison-highlight"></span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br>}</td>
+    <td class="code-comparison-code">if&nbsp;(<span class="code-comparison-highlight">&nbsp;</span>$foo<span class="code-comparison-highlight">&nbsp;</span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br>}</td>
+   </tr>
+  </table>
+  <a name="End-File-Newline" />
+  <h2>End File Newline</h2>
+  <p class="text">PHP Files should end with exactly one newline.</p>
+  <a name="Class-Declaration" />
+  <h2>Class Declaration</h2>
+  <p class="text">Each class must be in a file by itself and must be under a namespace (a top-level vendor name).</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: One class in a file.</td>
+    <td class="code-comparison-title">Invalid: Multiple classes in a single file.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">&lt;?php</br>namespace&nbsp;Foo;</br></br><span class="code-comparison-highlight">class&nbsp;Bar</span>&nbsp;{</br>}</td>
+    <td class="code-comparison-code">&lt;?php</br>namespace&nbsp;Foo;</br></br><span class="code-comparison-highlight">class&nbsp;Bar</span>&nbsp;{</br>}</br></br><span class="code-comparison-highlight">class&nbsp;Baz</span>&nbsp;{</br>}</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: A vendor-level namespace is used.</td>
+    <td class="code-comparison-title">Invalid: No namespace used in file.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">&lt;?php</br><span class="code-comparison-highlight">namespace&nbsp;Foo;</span></br></br>class&nbsp;Bar&nbsp;{</br>}</td>
+    <td class="code-comparison-code">&lt;?php</br>class&nbsp;Bar&nbsp;{</br>}</td>
+   </tr>
+  </table>
+  <a name="Side-Effects" />
+  <h2>Side Effects</h2>
+  <p class="text">A php file should either contain declarations with no side effects, or should just have logic (including side effects) with no declarations.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: A class defined in a file by itself.</td>
+    <td class="code-comparison-title">Invalid: A class defined in a file with other code.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">&lt;?php</br>class&nbsp;Foo</br>{</br>}</td>
+    <td class="code-comparison-code">&lt;?php</br>class&nbsp;Foo</br>{</br>}</br></br><span class="code-comparison-highlight">echo&nbsp;"Class&nbsp;Foo&nbsp;loaded."</span></td>
+   </tr>
+  </table>
+  <a name="PHP-Code-Tags" />
+  <h2>PHP Code Tags</h2>
+  <p class="text">Always use &lt;?php ?&gt; to delimit PHP code, not the &lt;? ?&gt; shorthand. This is the most portable way to include PHP code on differing operating systems and setups.</p>
+  <a name="Byte-Order-Marks" />
+  <h2>Byte Order Marks</h2>
+  <p class="text">Byte Order Marks that may corrupt your application should not be used.  These include 0xefbbbf (UTF-8), 0xfeff (UTF-16 BE) and 0xfffe (UTF-16 LE).</p>
+  <a name="Constant-Names" />
+  <h2>Constant Names</h2>
+  <p class="text">Constants should always be all-uppercase, with underscores to separate words.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: all uppercase</td>
+    <td class="code-comparison-title">Invalid: mixed case</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">define('<span class="code-comparison-highlight">FOO_CONSTANT</span>',&nbsp;'foo');</br></br>class&nbsp;FooClass</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;const&nbsp;<span class="code-comparison-highlight">FOO_CONSTANT</span>&nbsp;=&nbsp;'foo';</br>}</td>
+    <td class="code-comparison-code">define('<span class="code-comparison-highlight">Foo_Constant</span>',&nbsp;'foo');</br></br>class&nbsp;FooClass</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;const&nbsp;<span class="code-comparison-highlight">foo_constant</span>&nbsp;=&nbsp;'foo';</br>}</td>
+   </tr>
+  </table>
+  <a name="Line-Endings" />
+  <h2>Line Endings</h2>
+  <p class="text">Unix-style line endings are preferred (&quot;\n&quot; instead of &quot;\r\n&quot;).</p>
+  <a name="Line-Length" />
+  <h2>Line Length</h2>
+  <p class="text">It is recommended to keep lines at approximately 80 characters long for better code readability.</p>
+  <a name="Multiple-Statements-On-a-Single-Line" />
+  <h2>Multiple Statements On a Single Line</h2>
+  <p class="text">Multiple statements are not allowed on a single line.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Two statements are spread out on two separate lines.</td>
+    <td class="code-comparison-title">Invalid: Two statements are combined onto one line.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">$foo&nbsp;=&nbsp;1;</br>$bar&nbsp;=&nbsp;2;</td>
+    <td class="code-comparison-code">$foo&nbsp;=&nbsp;1;&nbsp;$bar&nbsp;=&nbsp;2;</td>
+   </tr>
+  </table>
+  <a name="Scope-Indentation" />
+  <h2>Scope Indentation</h2>
+  <p class="text">Indentation for control structures, classes, and functions should be 4 spaces per level.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: 4 spaces are used to indent a control structure.</td>
+    <td class="code-comparison-title">Invalid: 8 spaces are used to indent a control structure.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">if&nbsp;($test)&nbsp;{</br><span class="code-comparison-highlight">&nbsp;&nbsp;&nbsp;&nbsp;</span>$var&nbsp;=&nbsp;1;</br>}</td>
+    <td class="code-comparison-code">if&nbsp;($test)&nbsp;{</br><span class="code-comparison-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>$var&nbsp;=&nbsp;1;</br>}</td>
+   </tr>
+  </table>
+  <a name="No-Tab-Indentation" />
+  <h2>No Tab Indentation</h2>
+  <p class="text">Spaces should be used for indentation instead of tabs.</p>
+  <a name="Lowercase-Keywords" />
+  <h2>Lowercase Keywords</h2>
+  <p class="text">All PHP keywords should be lowercase.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Lowercase array keyword used.</td>
+    <td class="code-comparison-title">Invalid: Non-lowercase array keyword used.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">$foo&nbsp;=&nbsp;<span class="code-comparison-highlight">array</span>();</td>
+    <td class="code-comparison-code">$foo&nbsp;=&nbsp;<span class="code-comparison-highlight">Array</span>();</td>
+   </tr>
+  </table>
+  <a name="PHP-Constants" />
+  <h2>PHP Constants</h2>
+  <p class="text">The <em>true</em>, <em>false</em> and <em>null</em> constants must always be lowercase.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: lowercase constants</td>
+    <td class="code-comparison-title">Invalid: uppercase constants</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">if&nbsp;($var&nbsp;===&nbsp;<span class="code-comparison-highlight">false</span>&nbsp;||&nbsp;$var&nbsp;===&nbsp;<span class="code-comparison-highlight">null</span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;<span class="code-comparison-highlight">true</span>;</br>}</td>
+    <td class="code-comparison-code">if&nbsp;($var&nbsp;===&nbsp;<span class="code-comparison-highlight">FALSE</span>&nbsp;||&nbsp;$var&nbsp;===&nbsp;<span class="code-comparison-highlight">NULL</span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;<span class="code-comparison-highlight">TRUE</span>;</br>}</td>
+   </tr>
+  </table>
+  <a name="Scope-Keyword-Spacing" />
+  <h2>Scope Keyword Spacing</h2>
+  <p class="text">The php keywords static, public, private, and protected should have one space after them.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: A single space following the keywords.</td>
+    <td class="code-comparison-title">Invalid: Multiple spaces following the keywords.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">public<span class="code-comparison-highlight">&nbsp;</span>static<span class="code-comparison-highlight">&nbsp;</span>function&nbsp;foo()</br>{</br>}</td>
+    <td class="code-comparison-code">public<span class="code-comparison-highlight">&nbsp;&nbsp;</span>static<span class="code-comparison-highlight">&nbsp;&nbsp;</span>function&nbsp;foo()</br>{</br>}</td>
+   </tr>
+  </table>
+  <a name="Lowercase-Function-Keywords" />
+  <h2>Lowercase Function Keywords</h2>
+  <p class="text">The php keywords function, public, private, protected, and static should be lowercase.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Lowercase function keyword.</td>
+    <td class="code-comparison-title">Invalid: Uppercase function keyword.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code"><span class="code-comparison-highlight">function</span>&nbsp;foo()</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;</br>}</td>
+    <td class="code-comparison-code"><span class="code-comparison-highlight">FUNCTION</span>&nbsp;foo()</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;</br>}</td>
+   </tr>
+  </table>
+  <a name="Default-Values-in-Function-Declarations" />
+  <h2>Default Values in Function Declarations</h2>
+  <p class="text">Arguments with default values go at the end of the argument list.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: argument with default value at end of declaration</td>
+    <td class="code-comparison-title">Invalid: argument with default value at start of declaration</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">function&nbsp;connect($dsn,&nbsp;<span class="code-comparison-highlight">$persistent&nbsp;=&nbsp;false</span>)</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;...</br>}</td>
+    <td class="code-comparison-code">function&nbsp;connect(<span class="code-comparison-highlight">$persistent&nbsp;=&nbsp;false</span>,&nbsp;$dsn)</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;...</br>}</td>
+   </tr>
+  </table>
+  <a name="Function-Argument-Spacing" />
+  <h2>Function Argument Spacing</h2>
+  <p class="text">Function arguments should have one space after a comma, and single spaces surrounding the equals sign for default values.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Single spaces after a comma.</td>
+    <td class="code-comparison-title">Invalid: No spaces after a comma.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">function&nbsp;foo($bar,<span class="code-comparison-highlight">&nbsp;</span>$baz)</br>{</br>}</td>
+    <td class="code-comparison-code">function&nbsp;foo($bar,<span class="code-comparison-highlight"></span>$baz)</br>{</br>}</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Single spaces around an equals sign in function declaration.</td>
+    <td class="code-comparison-title">Invalid: No spaces around an equals sign in function declaration.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">function&nbsp;foo($bar,&nbsp;$baz<span class="code-comparison-highlight">&nbsp;</span>=<span class="code-comparison-highlight">&nbsp;</span>true)</br>{</br>}</td>
+    <td class="code-comparison-code">function&nbsp;foo($bar,&nbsp;$baz<span class="code-comparison-highlight"></span>=<span class="code-comparison-highlight"></span>true)</br>{</br>}</td>
+   </tr>
+  </table>
+  <a name="Foreach-Loop-Declarations" />
+  <h2>Foreach Loop Declarations</h2>
+  <p class="text">There should be a space between each element of a foreach loop and the as keyword should be lowercase.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Correct spacing used.</td>
+    <td class="code-comparison-title">Invalid: Invalid spacing used.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">foreach&nbsp;(<span class="code-comparison-highlight"></span>$foo<span class="code-comparison-highlight">&nbsp;</span>as<span class="code-comparison-highlight">&nbsp;</span>$bar<span class="code-comparison-highlight">&nbsp;</span>=><span class="code-comparison-highlight">&nbsp;</span>$baz<span class="code-comparison-highlight"></span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$baz;</br>}</td>
+    <td class="code-comparison-code">foreach&nbsp;(<span class="code-comparison-highlight">&nbsp;</span>$foo<span class="code-comparison-highlight">&nbsp;&nbsp;</span>as<span class="code-comparison-highlight">&nbsp;&nbsp;</span>$bar<span class="code-comparison-highlight"></span>=><span class="code-comparison-highlight"></span>$baz<span class="code-comparison-highlight">&nbsp;</span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$baz;</br>}</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Lowercase as keyword.</td>
+    <td class="code-comparison-title">Invalid: Uppercase as keyword.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">foreach&nbsp;($foo&nbsp;<span class="code-comparison-highlight">as</span>&nbsp;$bar&nbsp;=>&nbsp;$baz)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$baz;</br>}</td>
+    <td class="code-comparison-code">foreach&nbsp;($foo&nbsp;<span class="code-comparison-highlight">AS</span>&nbsp;$bar&nbsp;=>&nbsp;$baz)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$baz;</br>}</td>
+   </tr>
+  </table>
+  <a name="For-Loop-Declarations" />
+  <h2>For Loop Declarations</h2>
+  <p class="text">In a for loop declaration, there should be no space inside the brackets and there should be 0 spaces before and 1 space after semicolons.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Correct spacing used.</td>
+    <td class="code-comparison-title">Invalid: Invalid spacing used inside brackets.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">for&nbsp;(<span class="code-comparison-highlight"></span>$i&nbsp;=&nbsp;0;&nbsp;$i&nbsp;<&nbsp;10;&nbsp;$i++<span class="code-comparison-highlight"></span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$i;</br>}</td>
+    <td class="code-comparison-code">for&nbsp;(<span class="code-comparison-highlight">&nbsp;</span>$i&nbsp;=&nbsp;0;&nbsp;$i&nbsp;<&nbsp;10;&nbsp;$i++<span class="code-comparison-highlight">&nbsp;</span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$i;</br>}</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Correct spacing used.</td>
+    <td class="code-comparison-title">Invalid: Invalid spacing used before semicolons.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">for&nbsp;($i&nbsp;=&nbsp;0<span class="code-comparison-highlight"></span>;&nbsp;$i&nbsp;<&nbsp;10<span class="code-comparison-highlight"></span>;&nbsp;$i++)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$i;</br>}</td>
+    <td class="code-comparison-code">for&nbsp;($i&nbsp;=&nbsp;0<span class="code-comparison-highlight">&nbsp;</span>;&nbsp;$i&nbsp;<&nbsp;10<span class="code-comparison-highlight">&nbsp;</span>;&nbsp;$i++)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$i;</br>}</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Correct spacing used.</td>
+    <td class="code-comparison-title">Invalid: Invalid spacing used after semicolons.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">for&nbsp;($i&nbsp;=&nbsp;0;<span class="code-comparison-highlight">&nbsp;</span>$i&nbsp;<&nbsp;10;<span class="code-comparison-highlight">&nbsp;</span>$i++)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$i;</br>}</td>
+    <td class="code-comparison-code">for&nbsp;($i&nbsp;=&nbsp;0;<span class="code-comparison-highlight"></span>$i&nbsp;<&nbsp;10;<span class="code-comparison-highlight"></span>$i++)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$i;</br>}</td>
+   </tr>
+  </table>
+  <a name="Lowercase-Control-Structure-Keywords" />
+  <h2>Lowercase Control Structure Keywords</h2>
+  <p class="text">The php keywords if, else, elseif, foreach, for, do, switch, while, try, and catch should be lowercase.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Lowercase if keyword.</td>
+    <td class="code-comparison-title">Invalid: Uppercase if keyword.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code"><span class="code-comparison-highlight">if</span>&nbsp;($foo)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$bar&nbsp;=&nbsp;true;</br>}</td>
+    <td class="code-comparison-code"><span class="code-comparison-highlight">IF</span>&nbsp;($foo)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$bar&nbsp;=&nbsp;true;</br>}</td>
+   </tr>
+  </table>
+  <a name="Inline-Control-Structures" />
+  <h2>Inline Control Structures</h2>
+  <p class="text">Control Structures should use braces.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Braces are used around the control structure.</td>
+    <td class="code-comparison-title">Invalid: No braces are used for the control structure..</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">if&nbsp;($test)&nbsp;<span class="code-comparison-highlight">{</span></br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br><span class="code-comparison-highlight">}</span></td>
+    <td class="code-comparison-code">if&nbsp;($test)</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</td>
+   </tr>
+  </table>
+  <a name="Empty-Statements" />
+  <h2>Empty Statements</h2>
+  <p class="text">Control Structures must have at least one statement inside of the body.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: There is a statement inside the control structure.</td>
+    <td class="code-comparison-title">Invalid: The control structure has no statements.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">if&nbsp;($test)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br>}</td>
+    <td class="code-comparison-code">if&nbsp;($test)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comparison-highlight">//&nbsp;do&nbsp;nothing</span></br>}</td>
+   </tr>
+  </table>
+  <a name="Condition-Only-For-Loops" />
+  <h2>Condition-Only For Loops</h2>
+  <p class="text">For loops that have only a second expression (the condition) should be converted to while loops.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: A for loop is used with all three expressions.</td>
+    <td class="code-comparison-title">Invalid: A for loop is used without a first or third expression.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">for&nbsp;(<span class="code-comparison-highlight">$i&nbsp;=&nbsp;0</span>;&nbsp;$i&nbsp;<&nbsp;10;&nbsp;<span class="code-comparison-highlight">$i++</span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;"{$i}\n";</br>}</td>
+    <td class="code-comparison-code">for&nbsp;(<span class="code-comparison-highlight"></span>;$test;<span class="code-comparison-highlight"></span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$test&nbsp;=&nbsp;doSomething();</br>}</td>
+   </tr>
+  </table>
+  <a name="For-Loops-With-Function-Calls-in-the-Test" />
+  <h2>For Loops With Function Calls in the Test</h2>
+  <p class="text">For loops should not call functions inside the test for the loop when they can be computed beforehand.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: A for loop that determines its end condition before the loop starts.</td>
+    <td class="code-comparison-title">Invalid: A for loop that unnecessarily computes the same value on every iteration.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code"><span class="code-comparison-highlight">$end&nbsp;=&nbsp;count($foo);</span></br>for&nbsp;($i&nbsp;=&nbsp;0;&nbsp;$i&nbsp;<&nbsp;$end;&nbsp;$i++)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$foo[$i]."\n";</br>}</td>
+    <td class="code-comparison-code">for&nbsp;($i&nbsp;=&nbsp;0;&nbsp;$i&nbsp;<&nbsp;<span class="code-comparison-highlight">count($foo)</span>;&nbsp;$i++)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;$foo[$i]."\n";</br>}</td>
+   </tr>
+  </table>
+  <a name="Unconditional-If-Statements" />
+  <h2>Unconditional If Statements</h2>
+  <p class="text">If statements that are always evaluated should not be used.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: An if statement that only executes conditionally.</td>
+    <td class="code-comparison-title">Invalid: An if statement that is always performed.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">if&nbsp;(<span class="code-comparison-highlight">$test</span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br>}</td>
+    <td class="code-comparison-code">if&nbsp;(<span class="code-comparison-highlight">true</span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br>}</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: An if statement that only executes conditionally.</td>
+    <td class="code-comparison-title">Invalid: An if statement that is never performed.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">if&nbsp;(<span class="code-comparison-highlight">$test</span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br>}</td>
+    <td class="code-comparison-code">if&nbsp;(<span class="code-comparison-highlight">false</span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br>}</td>
+   </tr>
+  </table>
+  <a name="Unnecessary-Final-Modifiers" />
+  <h2>Unnecessary Final Modifiers</h2>
+  <p class="text">Methods should not be declared final inside of classes that are declared final.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: A method in a final class is not marked final.</td>
+    <td class="code-comparison-title">Invalid: A method in a final class is also marked final.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">final&nbsp;class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;bar()</br>&nbsp;&nbsp;&nbsp;&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}</td>
+    <td class="code-comparison-code">final&nbsp;class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;<span class="code-comparison-highlight">final</span>&nbsp;function&nbsp;bar()</br>&nbsp;&nbsp;&nbsp;&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}</td>
+   </tr>
+  </table>
+  <a name="Useless-Overriding-Methods" />
+  <h2>Useless Overriding Methods</h2>
+  <p class="text">Methods should not be defined that only call the parent method.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: A method that extends functionality on a parent method.</td>
+    <td class="code-comparison-title">Invalid: An overriding method that only calls the parent.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">final&nbsp;class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;bar()</br>&nbsp;&nbsp;&nbsp;&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent::bar();</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comparison-highlight">$this->doSomethingElse();</span></br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}</td>
+    <td class="code-comparison-code">final&nbsp;class&nbsp;Foo</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;bar()</br>&nbsp;&nbsp;&nbsp;&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comparison-highlight">parent::bar();</span></br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}</td>
+   </tr>
+  </table>
+  <a name="Doc-Comment-Alignment" />
+  <h2>Doc Comment Alignment</h2>
+  <p class="text">The asterisks in a doc comment should align, and there should be one space between the asterisk and tags.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: Asterisks are aligned.</td>
+    <td class="code-comparison-title">Invalid: Asterisks are not aligned.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">/**</br><span class="code-comparison-highlight">&nbsp;</span>*&nbsp;@see&nbsp;foo()</br><span class="code-comparison-highlight">&nbsp;</span>*/</td>
+    <td class="code-comparison-code">/**</br><span class="code-comparison-highlight">&nbsp;&nbsp;</span>*&nbsp;@see&nbsp;foo()</br><span class="code-comparison-highlight"></span>*/</td>
+   </tr>
+  </table>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: One space between asterisk and tag.</td>
+    <td class="code-comparison-title">Invalid: Incorrect spacing used.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">/**</br>&nbsp;*<span class="code-comparison-highlight">&nbsp;</span>@see&nbsp;foo()</br>&nbsp;*/</td>
+    <td class="code-comparison-code">/**</br>&nbsp;*<span class="code-comparison-highlight">&nbsp;&nbsp;</span>@see&nbsp;foo()</br>&nbsp;*/</td>
+   </tr>
+  </table>
+  <a name="Doc-Comment-Throws-Tag" />
+  <h2>Doc Comment Throws Tag</h2>
+  <p class="text">If a function throws any exceptions, they should be documented in a @throws tag.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: @throws tag used.</td>
+    <td class="code-comparison-title">Invalid: No @throws tag used for throwing function.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">/**</br>&nbsp;*&nbsp;<span class="code-comparison-highlight">@throws&nbsp;Exception&nbsp;all&nbsp;the&nbsp;time</span></br>&nbsp;*&nbsp;@return&nbsp;void</br>&nbsp;*/</br>function&nbsp;foo()</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;Exception('Danger!');</br>}</td>
+    <td class="code-comparison-code">/**</br>&nbsp;*&nbsp;@return&nbsp;void</br>&nbsp;*/</br>function&nbsp;foo()</br>{</br>&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;Exception('Danger!');</br>}</td>
+   </tr>
+  </table>
+  <a name="Todo-Comments" />
+  <h2>Todo Comments</h2>
+  <p class="text">FIXME Statements should be taken care of.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: A comment without a fixme.</td>
+    <td class="code-comparison-title">Invalid: A fixme comment.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">//&nbsp;<span class="code-comparison-highlight">Handle&nbsp;strange&nbsp;case</span></br>if&nbsp;($test)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br>}</td>
+    <td class="code-comparison-code">//&nbsp;<span class="code-comparison-highlight">FIXME</span>:&nbsp;This&nbsp;needs&nbsp;to&nbsp;be&nbsp;fixed!</br>if&nbsp;($test)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br>}</td>
+   </tr>
+  </table>
+  <a name="Todo-Comments" />
+  <h2>Todo Comments</h2>
+  <p class="text">TODO Statements should be taken care of.</p>
+  <table class="code-comparison">
+   <tr>
+    <td class="code-comparison-title">Valid: A comment without a todo.</td>
+    <td class="code-comparison-title">Invalid: A todo comment.</td>
+   </tr>
+   <tr>
+    <td class="code-comparison-code">//&nbsp;<span class="code-comparison-highlight">Handle&nbsp;strange&nbsp;case</span></br>if&nbsp;($test)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br>}</td>
+    <td class="code-comparison-code">//&nbsp;<span class="code-comparison-highlight">TODO</span>:&nbsp;This&nbsp;needs&nbsp;to&nbsp;be&nbsp;fixed!</br>if&nbsp;($test)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;$var&nbsp;=&nbsp;1;</br>}</td>
+   </tr>
+  </table>
+  <a name="Cyclomatic-Complexity" />
+  <h2>Cyclomatic Complexity</h2>
+  <p class="text">Functions should not have a cyclomatic complexity greater than 20, and should try to stay below a complexity of 10.</p>
+  <a name="Nesting-Level" />
+  <h2>Nesting Level</h2>
+  <p class="text">Functions should not have a nesting level greater than 10, and should try to stay below 5.</p>
+  <div class="tag-line">Documentation generated on Wed, 15 Nov 2017 11:49:32 -0500 by <a href="https://github.com/squizlabs/PHP_CodeSniffer">PHP_CodeSniffer 2.8.1</a></div>
+ </body>
+</html>
