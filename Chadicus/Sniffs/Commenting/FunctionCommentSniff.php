@@ -1,6 +1,6 @@
 <?php
 
-final class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends Squiz_Sniffs_Commenting_FunctionCommentSniff
+final class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenting_FunctionCommentSniff
 {
     /**
      * Ensures only public methods are processed.
