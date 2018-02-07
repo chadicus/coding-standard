@@ -16,12 +16,8 @@ See what "sniffs" are enforced [here](http://chadicus.github.io/coding-standard)
 
 This standard is meant to be used in a project using [Composer](http://getcomposer.org).  It can be added to your project's composer.json as follows:
 
-```json
-{
-    "require-dev": {
-        "chadicus/coding-standard": "~1.0"
-    }
-}
+```sh
+composer require --dev chadicus/coding-standard
 ```
 
 Then to use it, you can run the following (or add to your build process):
