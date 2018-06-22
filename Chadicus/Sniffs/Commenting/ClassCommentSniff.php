@@ -45,7 +45,7 @@ final class Chadicus_Sniffs_Commenting_ClassCommentSniff implements PHP_CodeSnif
         if ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
             && $tokens[$commentEnd]['code'] !== T_COMMENT
         ) {
-            $phpcsFile->addError('Missing class doc comment', $stackPtr, 'Missing');
+            //Don't require the class doc block.
             return;
         }
 
