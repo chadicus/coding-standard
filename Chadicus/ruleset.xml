@@ -11,7 +11,6 @@
     <rule ref="Generic.ControlStructures.InlineControlStructure" />
     <rule ref="Squiz.Commenting.DocCommentAlignment" />
     <rule ref="Squiz.Commenting.FunctionCommentThrowTag" />
-    <rule ref="Squiz.Commenting.VariableComment" />
     <rule ref="Generic.Commenting.Fixme" />
     <rule ref="Generic.Commenting.Todo" />
     <rule ref="Generic.Metrics.CyclomaticComplexity" />
