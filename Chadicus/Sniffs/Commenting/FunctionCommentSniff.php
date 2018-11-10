@@ -115,33 +115,9 @@ class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commen
                 // If the return type is void, make sure there is
                 // no return statement in the function.
                 if ($returnType === 'void') {
-                    if (isset($tokens[$stackPtr]['scope_closer']) === true) {
-                        $endToken = $tokens[$stackPtr]['scope_closer'];
-                        for ($returnToken = $stackPtr; $returnToken < $endToken; $returnToken++) {
-                            if ($tokens[$returnToken]['code'] === T_CLOSURE
-                                || $tokens[$returnToken]['code'] === T_ANON_CLASS
-                            ) {
-                                $returnToken = $tokens[$returnToken]['scope_closer'];
-                                continue;
-                            }
-
-                            if ($tokens[$returnToken]['code'] === T_RETURN
-                                || $tokens[$returnToken]['code'] === T_YIELD
-                                || $tokens[$returnToken]['code'] === T_YIELD_FROM
-                            ) {
-                                break;
-                            }
-                        }
-
-                        if ($returnToken !== $endToken) {
-                            // If the function is not returning anything, just
-                            // exiting, then there is no problem.
-                            $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
-                            if ($tokens[$semicolon]['code'] !== T_SEMICOLON) {
-                                $error = 'Function return type is void, but function contains return statement';
-                                $phpcsFile->addError($error, $return, 'InvalidReturnVoid');
-                            }
-                        }
+                    if (!$this->isReturnVoid($phpcsFile, $tokens, $stackPtr)) {
+                        $error = 'Function return type is void, but function contains return statement';
+                        $phpcsFile->addError($error, $return, 'InvalidReturnVoid');
                     }//end if
                 } else if ($returnType !== 'mixed' && in_array('void', $typeNames, true) === false) {
                     // If return type is not void, there needs to be a return statement
@@ -163,11 +139,50 @@ class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commen
                 }//end if
             }//end if
         } else {
-            $error = 'Missing @return tag in function comment';
-            $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
+            if (!$this->isReturnVoid($phpcsFile, $tokens, $stackPtr)) {
+                $error = 'Missing @return tag in function comment';
+                $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
+            }
         }//end if
 
     }//end processReturn()
+
+    private function isReturnVoid($phpcsFile, $tokens, $stackPtr) : bool
+    {
+        if (isset($tokens[$stackPtr]['scope_closer']) !== true) {
+            return true;
+        }
+
+        $endToken = $tokens[$stackPtr]['scope_closer'];
+        for ($returnToken = $stackPtr; $returnToken < $endToken; $returnToken++) {
+            if ($tokens[$returnToken]['code'] === T_CLOSURE
+                || $tokens[$returnToken]['code'] === T_ANON_CLASS
+            ) {
+                $returnToken = $tokens[$returnToken]['scope_closer'];
+                continue;
+            }
+
+            if ($tokens[$returnToken]['code'] === T_RETURN
+                || $tokens[$returnToken]['code'] === T_YIELD
+                || $tokens[$returnToken]['code'] === T_YIELD_FROM
+            ) {
+                break;
+            }
+        }
+
+        if ($returnToken === $endToken) {
+            return true;
+        }
+
+        // If the function is not returning anything, just
+        // exiting, then there is no problem.
+        $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
+        if ($tokens[$semicolon]['code'] !== T_SEMICOLON) {
+            return false;
+        }
+
+        return true;
+    }
 
     /**
      * Process any throw tags that this function comment has.
