@@ -1,9 +1,13 @@
 <?php
 
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Issues warning with method length greater than 100 and issues error if length is greater than 200.
  */
-final class Chadicus_Sniffs_Methods_LongMethodSniff implements PHP_CodeSniffer_Sniff
+final class Chadicus_Sniffs_Methods_LongMethodSniff implements Sniff
 {
     /**
      * Length at which a warning will be triggered.
@@ -30,12 +34,12 @@ final class Chadicus_Sniffs_Methods_LongMethodSniff implements PHP_CodeSniffer_S
     }
 
     /**
-     * @param PHP_CodeSniffer_File $phpcsFile The file where the token was found.
+     * @param File $phpcsFile The file where the token was found.
      * @param intege               $stackPtr  The position in the stack where the token was found.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $token = $tokens[$stackPtr];

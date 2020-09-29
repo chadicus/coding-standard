@@ -1,4 +1,9 @@
 <?php
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Parses and verifies the class doc comment.
  *
@@ -12,7 +17,7 @@
  *  <li>Disallows throws, return, var and param tags.</li>
  * </ul>
  */
-final class Chadicus_Sniffs_Commenting_ClassCommentSniff implements PHP_CodeSniffer_Sniff
+final class Chadicus_Sniffs_Commenting_ClassCommentSniff implements Sniff
 {
     public $disallowedTags = array('@throws', '@return', '@var', '@param');
 
@@ -29,16 +34,16 @@ final class Chadicus_Sniffs_Commenting_ClassCommentSniff implements PHP_CodeSnif
     /**
      * Processes this test, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param File $phpcsFile The file being scanned.
      * @param int                  $stackPtr  The position of the current token
      *                                        in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
-        $find   = PHP_CodeSniffer_Tokens::$methodPrefixes;
+        $find   = Tokens::$methodPrefixes;
         $find[] = T_WHITESPACE;
 
         $commentEnd = $phpcsFile->findPrevious($find, ($stackPtr - 1), null, true);

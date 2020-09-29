@@ -1,11 +1,14 @@
 <?php
 
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+
 /**
  * Verifies that no whitespace proceeds the first content of the file, that there is
  * no whitespace at the end of a line, that there are no extra new lines before or after
  * a function or class or control structure, and that there are no two empty lines in a row.
  */
-final class Chadicus_Sniffs_WhiteSpace_ControlStructureTrailingSpacingSniff implements PHP_CodeSniffer_Sniff
+final class Chadicus_Sniffs_WhiteSpace_ControlStructureTrailingSpacingSniff implements Sniff
 {
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -20,12 +23,12 @@ final class Chadicus_Sniffs_WhiteSpace_ControlStructureTrailingSpacingSniff impl
     /**
      * Processes this test, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param File $phpcsFile The file being scanned.
      * @param int $stackPtr The position of the current token in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $token = $tokens[$stackPtr];

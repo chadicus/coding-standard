@@ -1,6 +1,10 @@
 <?php
 
-class Chadicus_Sniffs_Classes_UnusedUseStatementSniff implements PHP_CodeSniffer_Sniff
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Util\Tokens;
+
+class Chadicus_Sniffs_Classes_UnusedUseStatementSniff implements Sniff
 {
 
     /**
@@ -17,13 +21,13 @@ class Chadicus_Sniffs_Classes_UnusedUseStatementSniff implements PHP_CodeSniffer
     /**
      * Processes this test, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param File $phpcsFile The file being scanned.
      * @param int                  $stackPtr  The position of the current token in
      *                                        the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -39,7 +43,7 @@ class Chadicus_Sniffs_Classes_UnusedUseStatementSniff implements PHP_CodeSniffer
         }
 
         $classPtr = $phpcsFile->findPrevious(
-            PHP_CodeSniffer_Tokens::$emptyTokens,
+            Tokens::$emptyTokens,
             ($semiColon - 1),
             null,
             true
@@ -101,7 +105,7 @@ class Chadicus_Sniffs_Classes_UnusedUseStatementSniff implements PHP_CodeSniffer
                 }
 
                 $beforeUsage = $phpcsFile->findPrevious(
-                    PHP_CodeSniffer_Tokens::$emptyTokens,
+                    Tokens::$emptyTokens,
                     ($classUsed - 1),
                     null,
                     true
