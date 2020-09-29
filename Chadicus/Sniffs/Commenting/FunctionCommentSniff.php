@@ -1,6 +1,13 @@
 <?php
 
-class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenting_FunctionCommentSniff
+use PHP_CodeSniffer\Config;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\FunctionCommentSniff;
+use PHP_CodeSniffer\Util\Tokens;
+use PHP_CodeSniffer\Util\Common;
+
+class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends FunctionCommentSniff
 {
     /**
      * The current PHP version.
@@ -12,19 +19,19 @@ class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commen
     /**
      * An array of variable types for param/var we will check.
      *
-     * @var array(string)
+     * @var array<string>
      */
     public static $allowedTypes = ['array', 'boolean', 'float', 'integer', 'mixed', 'object', 'string', 'resource', 'callable'];
 
     /**
      * Ensures only public methods are processed.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param File $phpcsFile The file being scanned.
      * @param int                  $stackPtr  The position of the current token in the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $methodProperties = $phpcsFile->getMethodProperties($stackPtr);
         if ($methodProperties['scope'] !== 'public') {
@@ -37,14 +44,14 @@ class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commen
     /**
      * Process the return comment of this function comment.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+     * @param File $phpcsFile    The file being scanned.
      * @param int                  $stackPtr     The position of the current token
      *                                           in the stack passed in $tokens.
      * @param int                  $commentStart The position in the stack where the comment started.
      *
      * @return void
      */
-    protected function processReturn(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+    protected function processReturn(File $phpcsFile, $stackPtr, $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -187,14 +194,14 @@ class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commen
     /**
      * Process any throw tags that this function comment has.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+     * @param File $phpcsFile    The file being scanned.
      * @param int                  $stackPtr     The position of the current token
      *                                           in the stack passed in $tokens.
      * @param int                  $commentStart The position in the stack where the comment started.
      *
      * @return void
      */
-    protected function processThrows(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+    protected function processThrows(File $phpcsFile, $stackPtr, $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -242,17 +249,17 @@ class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commen
     /**
      * Process the function parameter comments.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+     * @param File $phpcsFile    The file being scanned.
      * @param int                  $stackPtr     The position of the current token
      *                                           in the stack passed in $tokens.
      * @param int                  $commentStart The position in the stack where the comment started.
      *
      * @return void
      */
-    protected function processParams(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+    protected function processParams(File $phpcsFile, $stackPtr, $commentStart)
     {
         if ($this->_phpVersion === null) {
-            $this->_phpVersion = PHP_CodeSniffer::getConfigData('php_version');
+            $this->_phpVersion = Config::getConfigData('php_version');
             if ($this->_phpVersion === null) {
                 $this->_phpVersion = PHP_VERSION_ID;
             }
@@ -388,7 +395,7 @@ class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commen
                     $suggestedTypeHint = 'callable';
                 } else if (strpos($suggestedName, 'callback') !== false) {
                     $suggestedTypeHint = 'callable';
-                } else if (in_array($suggestedName, PHP_CodeSniffer::$allowedTypes) === false) {
+                } else if (in_array($suggestedName, Common::$allowedTypes) === false) {
                     $suggestedTypeHint = $suggestedName;
                 }
 
@@ -445,7 +452,7 @@ class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commen
                 }//end if
             }//end foreach
 
-            $suggestedType = implode($suggestedTypeNames, '|');
+            $suggestedType = implode('|', $suggestedTypeNames);
             if ($param['type'] !== $suggestedType) {
                 $error = 'Expected "%s" but found "%s" for parameter type';
                 $data  = array(
@@ -548,14 +555,14 @@ class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commen
     /**
      * Check the spacing after the type of a parameter.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param File $phpcsFile The file being scanned.
      * @param array                $param     The parameter to be checked.
      * @param int                  $maxType   The maxlength of the longest parameter type.
      * @param int                  $spacing   The number of spaces to add after the type.
      *
      * @return void
      */
-    protected function checkSpacingAfterParamType(PHP_CodeSniffer_File $phpcsFile, $param, $maxType, $spacing = 1)
+    protected function checkSpacingAfterParamType(File $phpcsFile, $param, $maxType, $spacing = 1)
     {
         // Check number of spaces after the type.
         $spaces = ($maxType - strlen($param['type']) + $spacing);
@@ -602,14 +609,14 @@ class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commen
     /**
      * Check the spacing after the name of a parameter.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+     * @param File $phpcsFile The file being scanned.
      * @param array                $param     The parameter to be checked.
      * @param int                  $maxVar    The maxlength of the longest parameter name.
      * @param int                  $spacing   The number of spaces to add after the type.
      *
      * @return void
      */
-    protected function checkSpacingAfterParamName(PHP_CodeSniffer_File $phpcsFile, $param, $maxVar, $spacing = 1)
+    protected function checkSpacingAfterParamName(File $phpcsFile, $param, $maxVar, $spacing = 1)
     {
         // Check number of spaces after the var name.
         $spaces = ($maxVar - strlen($param['var']) + $spacing);
