@@ -445,7 +445,7 @@ class Chadicus_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commen
                 }//end if
             }//end foreach
 
-            $suggestedType = implode($suggestedTypeNames, '|');
+            $suggestedType = implode('|', $suggestedTypeNames);
             if ($param['type'] !== $suggestedType) {
                 $error = 'Expected "%s" but found "%s" for parameter type';
                 $data  = array(
