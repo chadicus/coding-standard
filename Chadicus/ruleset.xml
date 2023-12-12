@@ -17,7 +17,7 @@
     <rule ref="Generic.Metrics.NestingLevel">
         <properties>
             <property name="nestingLevel" value="2" />
-            <property name="absolutenestingLevel" value="3" />
+            <property name="absoluteNestingLevel" value="3" />
         </properties>
     </rule>
     <rule ref="Squiz.PHP.DiscouragedFunctions" />
